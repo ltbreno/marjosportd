@@ -42,6 +42,9 @@ public class UsuarioService {
         return usuarioRepository.findAllCpfs();
     }
 
-	
+	 public Usuario findById(Long id) {
+	        return usuarioRepository.findById(id)
+	                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+	    }
 
 }
