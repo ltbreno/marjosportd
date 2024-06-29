@@ -1,8 +1,11 @@
 package com.marjosports.API.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +37,16 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed. Please check your credentials.");
         }
     }
+	
+	  @GetMapping("/cpfs")
+	    public ResponseEntity<?> getAllCpfs(@RequestBody Usuario usuario) {
+	        if (usuario.isAdmin()) {
+	            List<String> allCpfs = usuarioService.getAllCpfs();
+	            return ResponseEntity.ok(allCpfs);
+	        } else {
+	            String cpf = usuario.getCpf(); 
+	            return ResponseEntity.ok(cpf);
+	        }
+	    }
 
 }

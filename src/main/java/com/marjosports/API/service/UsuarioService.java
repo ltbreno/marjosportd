@@ -35,6 +35,10 @@ public class UsuarioService {
 	        }
 		usuarioRepository.save(usuario);
 	}
+	
+	public List<String> getAllCpfs() {
+        return usuarioRepository.findAllCpfs();
+    }
 
 	
 
