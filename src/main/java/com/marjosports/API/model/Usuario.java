@@ -2,6 +2,8 @@ package com.marjosports.API.model;
 
 import java.io.Serializable;
 
+import org.antlr.v4.runtime.misc.NotNull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,8 @@ public class Usuario implements Serializable {
 	
 	private String appName;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
+	@NotNull
 	private String cpf;
 	
 	private String password;

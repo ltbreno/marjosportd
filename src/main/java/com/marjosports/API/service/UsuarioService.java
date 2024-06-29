@@ -1,7 +1,9 @@
 package com.marjosports.API.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.marjosports.API.model.Usuario;
 import com.marjosports.API.repository.UsuarioRepository;
@@ -24,6 +26,13 @@ public class UsuarioService {
     }
 	
 	public void create(Usuario usuario) {
+		 if (usuario.getCpf() == null) {
+	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF não pode ser nulo");
+	        }
+
+		 if (usuarioRepository.existsByCpf(usuario.getCpf())) {
+	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF já cadastrado");
+	        }
 		usuarioRepository.save(usuario);
 	}
 
